@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateMessage } from '../redux/greetingSlice';
+import { fetchGreeting } from '../redux/greetingSlice';
 
 const Greeting = () => {
   const message = useSelector((state) => state.greeting.message);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchGreeting());
+  }, [dispatch]);
+
   return (
-    <div>
+    <>
       <h1>{message}</h1>
-      <button onClick={() => dispatch(updateMessage('Hello from Redux!'))}>
-        Click me!
-      </button>
-    </div>
+    </>
   )
 }
 
